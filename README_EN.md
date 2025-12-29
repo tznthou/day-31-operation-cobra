@@ -6,7 +6,7 @@
 
 [← Back to Muripo HQ](https://tznthou.github.io/muripo-hq/) | [中文](README.md)
 
-A stealth game designed for office workers. The interface looks like a work application, but hides a classic Snake game inside. Press Esc to instantly pause and disguise the game — perfect for when the boss walks by.
+A stealth game designed for office workers. The interface looks like a work application, but hides classic games inside (Snake + 2048). Press Esc to instantly pause and disguise the game — perfect for when the boss walks by.
 
 > **"Looks like work, feels like play."**
 
@@ -16,9 +16,20 @@ A stealth game designed for office workers. The interface looks like a work appl
 
 This is a game **dressed in work clothes**.
 
-Six disguise skins, six different "I'm working" illusions: Google search, Excel spreadsheet, Jira board, Slack chat, Notion docs, VS Code editor. The Snake game hides in a small widget at the bottom-right corner. Press Esc and it transforms into a clock — boss-proof.
+Six disguise skins, six different "I'm working" illusions: Google search, Excel spreadsheet, Jira board, Slack chat, Notion docs, VS Code editor. Games (Snake or 2048) hide in a small widget at the bottom-right corner. Press Esc and it transforms into a clock — boss-proof.
 
 You're not playing a game, you're finding **an escape valve for stress**.
+
+---
+
+## Two Games
+
+| Game | Controls | Features | Slacking Safety |
+|------|----------|----------|-----------------|
+| **Snake** | Arrow keys | Classic arcade game | ⭐⭐⭐ |
+| **2048** | Arrow keys slide | Puzzle game, no time pressure | ⭐⭐⭐⭐⭐ |
+
+> **Switch games**: `Shift+G` to cycle / URL parameter `?game=2048`
 
 ---
 
@@ -65,7 +76,10 @@ You're not playing a game, you're finding **an escape valve for stress**.
 day-31-operation-cobra/
 ├── index.html          # Page structure (game widget)
 ├── style.css           # All styles (6 skins)
-├── game.js             # Game logic + skin switching
+├── game.js             # Core controller (game + skin switching)
+├── games/              # Game modules
+│   ├── snake.js        # Snake game
+│   └── game2048.js     # 2048 game
 ├── skins/              # Skin modules
 │   ├── google.js       # Google Search skin
 │   ├── excel.js        # Excel Spreadsheet skin
@@ -101,15 +115,11 @@ open index.html
 
 | Key | Function |
 |-----|----------|
-| **↑ ↓ ← →** | Control snake direction (starts game on press) |
+| **↑ ↓ ← →** | Control game (starts on press) |
 | **Esc** | Pause + hide game (transforms to clock) |
 | **Esc again** | Resume game |
-| **1** | Switch to Google skin |
-| **2** | Switch to Excel skin |
-| **3** | Switch to Jira skin |
-| **4** | Switch to Slack skin |
-| **5** | Switch to Notion skin |
-| **6** | Switch to VS Code skin |
+| **Shift+G** | Switch game (Snake ↔ 2048) |
+| **1-6** | Switch disguise skin |
 | **Any key** | Restart after Game Over |
 
 ---
@@ -142,6 +152,7 @@ These six scenarios cover almost all office "safe zones."
 ## Future Enhancements
 
 - [x] ~~More skins (Slack, Notion, VS Code)~~ ✓ Completed
+- [x] ~~2048 game~~ ✓ Completed (puzzle game, higher slacking safety)
 - [ ] High score tracking (localStorage)
 - [ ] Difficulty selection (speed adjustment)
 - [ ] Wall-pass mode (snake can pass through borders)

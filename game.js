@@ -6,10 +6,9 @@ import * as slackSkin from './skins/slack.js';
 import * as notionSkin from './skins/notion.js';
 import * as vscodeSkin from './skins/vscode.js';
 
-// ========== Game Constants ==========
-const GRID_SIZE = 10;
-const GRID_COUNT = 20;
-const GAME_SPEED = 150;
+// ========== Import Games ==========
+import * as snakeGame from './games/snake.js';
+import * as game2048 from './games/game2048.js';
 
 // ========== Game State ==========
 const GameState = {
@@ -20,12 +19,6 @@ const GameState = {
 };
 
 let state = GameState.READY;
-let snake = [];
-let food = { x: 0, y: 0 };
-let direction = 'right';
-let nextDirection = 'right';
-let score = 0;
-let gameLoop = null;
 
 // ========== Skin System ==========
 const SKINS = {
@@ -39,24 +32,35 @@ const SKINS = {
 
 let currentSkin = 'google';
 
+// ========== Game System ==========
+const GAMES = {
+  'snake': snakeGame,
+  '2048': game2048
+};
+
+let currentGame = null;
+let currentGameId = 'snake';
+
 // ========== DOM Elements ==========
 const skinContainer = document.getElementById('skin-container');
 const canvas = document.getElementById('snake-canvas');
-const ctx = canvas.getContext('2d');
 const widget = document.getElementById('game-widget');
 const scoreDisplay = document.getElementById('score');
 const messageDisplay = document.getElementById('game-message');
 const clockTime = document.getElementById('clock-time');
 const clockDate = document.getElementById('clock-date');
 const pageTitle = document.getElementById('page-title');
+const gameName = document.getElementById('game-name');
 
-// ========== Colors ==========
-const COLORS = {
-  background: '#f0f0f0',
-  snakeHead: '#2d5a27',
-  snakeBody: '#4a8b3c',
-  food: '#c0392b'
-};
+// ========== URL Parameter Handling ==========
+function getGameFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const gameParam = params.get('game');
+  if (gameParam && GAMES[gameParam]) {
+    return gameParam;
+  }
+  return 'snake'; // default
+}
 
 // ========== Skin Functions ==========
 function loadSkin(skin) {
@@ -73,140 +77,67 @@ function switchSkin(skinKey) {
 }
 
 // ========== Game Functions ==========
-function initGame() {
-  snake = [
-    { x: 10, y: 10 },
-    { x: 9, y: 10 },
-    { x: 8, y: 10 }
-  ];
-  direction = 'right';
-  nextDirection = 'right';
-  score = 0;
-  scoreDisplay.textContent = '0';
-  spawnFood();
-  draw();
-}
+function loadGame(gameId) {
+  const game = GAMES[gameId];
+  if (!game) return;
 
-function spawnFood() {
-  let newFood;
-  do {
-    newFood = {
-      x: Math.floor(Math.random() * GRID_COUNT),
-      y: Math.floor(Math.random() * GRID_COUNT)
-    };
-  } while (isOnSnake(newFood));
-  food = newFood;
-}
-
-function isOnSnake(pos) {
-  return snake.some(segment => segment.x === pos.x && segment.y === pos.y);
-}
-
-function update() {
-  if (state !== GameState.PLAYING) return;
-
-  direction = nextDirection;
-
-  // Calculate new head position
-  const head = { ...snake[0] };
-  switch (direction) {
-    case 'up': head.y--; break;
-    case 'down': head.y++; break;
-    case 'left': head.x--; break;
-    case 'right': head.x++; break;
+  // Stop current game if running
+  if (currentGame && currentGame.pause) {
+    currentGame.pause();
   }
 
-  // Check collision
-  if (checkCollision(head)) {
-    gameOver();
-    return;
+  currentGame = game;
+  currentGameId = gameId;
+  state = GameState.READY;
+
+  // Update game name in widget header
+  if (gameName) {
+    gameName.textContent = game.name;
   }
 
-  // Add new head
-  snake.unshift(head);
-
-  // Check food
-  if (head.x === food.x && head.y === food.y) {
-    score += 10;
-    scoreDisplay.textContent = score;
-    spawnFood();
-  } else {
-    snake.pop();
-  }
-
-  draw();
-}
-
-function checkCollision(head) {
-  // Wall collision
-  if (head.x < 0 || head.x >= GRID_COUNT || head.y < 0 || head.y >= GRID_COUNT) {
-    return true;
-  }
-  // Self collision
-  for (let i = 0; i < snake.length; i++) {
-    if (head.x === snake[i].x && head.y === snake[i].y) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function draw() {
-  // Clear canvas
-  ctx.fillStyle = COLORS.background;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Draw food
-  ctx.fillStyle = COLORS.food;
-  ctx.beginPath();
-  ctx.arc(
-    food.x * GRID_SIZE + GRID_SIZE / 2,
-    food.y * GRID_SIZE + GRID_SIZE / 2,
-    GRID_SIZE / 2 - 1,
-    0,
-    Math.PI * 2
-  );
-  ctx.fill();
-
-  // Draw snake
-  snake.forEach((segment, index) => {
-    ctx.fillStyle = index === 0 ? COLORS.snakeHead : COLORS.snakeBody;
-    ctx.fillRect(
-      segment.x * GRID_SIZE + 1,
-      segment.y * GRID_SIZE + 1,
-      GRID_SIZE - 2,
-      GRID_SIZE - 2
-    );
+  // Initialize game
+  currentGame.init(canvas, (newScore) => {
+    scoreDisplay.textContent = newScore;
   });
+
+  messageDisplay.textContent = '按方向鍵開始';
+}
+
+function switchGame(gameId) {
+  if (gameId === currentGameId) return;
+  loadGame(gameId);
+
+  // Update URL without reload
+  const url = new URL(window.location);
+  url.searchParams.set('game', gameId);
+  window.history.replaceState({}, '', url);
 }
 
 function startGame() {
   if (state === GameState.READY || state === GameState.GAME_OVER) {
-    initGame();
+    currentGame.reset();
+    currentGame.start();
     state = GameState.PLAYING;
     messageDisplay.textContent = '';
-    gameLoop = setInterval(update, GAME_SPEED);
   }
 }
 
 function gameOver() {
   state = GameState.GAME_OVER;
-  clearInterval(gameLoop);
-  gameLoop = null;
+  currentGame.pause();
   messageDisplay.textContent = '遊戲結束！按任意鍵重玩';
 }
 
 function togglePause() {
   if (state === GameState.PLAYING) {
     state = GameState.PAUSED;
-    clearInterval(gameLoop);
-    gameLoop = null;
+    currentGame.pause();
     widget.classList.add('hidden');
     updateClock();
   } else if (state === GameState.PAUSED) {
     state = GameState.PLAYING;
     widget.classList.remove('hidden');
-    gameLoop = setInterval(update, GAME_SPEED);
+    currentGame.resume();
   }
 }
 
@@ -235,10 +166,30 @@ setInterval(() => {
 
 // ========== Input Handling ==========
 document.addEventListener('keydown', (e) => {
-  // Skin switching (1, 2, 3)
-  if (SKINS[e.key]) {
+  // Skin switching (1-6) - only when NOT holding Shift
+  if (!e.shiftKey && SKINS[e.key]) {
     switchSkin(e.key);
     return;
+  }
+
+  // Game switching (Shift + G to cycle, or Shift + 1/2)
+  if (e.shiftKey) {
+    if (e.key === 'G' || e.key === 'g') {
+      // Cycle through games
+      const gameIds = Object.keys(GAMES);
+      const currentIndex = gameIds.indexOf(currentGameId);
+      const nextIndex = (currentIndex + 1) % gameIds.length;
+      switchGame(gameIds[nextIndex]);
+      return;
+    }
+    if (e.key === '!') { // Shift+1
+      switchGame('snake');
+      return;
+    }
+    if (e.key === '@') { // Shift+2
+      switchGame('2048');
+      return;
+    }
   }
 
   // Escape key - toggle pause/hide
@@ -251,14 +202,9 @@ document.addEventListener('keydown', (e) => {
   }
 
   // Direction keys
-  const directions = {
-    'ArrowUp': 'up',
-    'ArrowDown': 'down',
-    'ArrowLeft': 'left',
-    'ArrowRight': 'right'
-  };
+  const isArrowKey = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key);
 
-  if (directions[e.key]) {
+  if (isArrowKey) {
     e.preventDefault();
 
     // Start game if ready
@@ -266,22 +212,23 @@ document.addEventListener('keydown', (e) => {
       startGame();
     }
 
-    // Set direction (prevent 180° turn)
-    const opposites = { up: 'down', down: 'up', left: 'right', right: 'left' };
-    const newDir = directions[e.key];
-    if (newDir !== opposites[direction]) {
-      nextDirection = newDir;
+    // Pass to current game
+    if (state === GameState.PLAYING) {
+      const result = currentGame.handleKey(e.key);
+      if (result === 'gameover') {
+        gameOver();
+      }
     }
     return;
   }
 
-  // Any key to restart after game over (except skin keys)
-  if (state === GameState.GAME_OVER && !SKINS[e.key]) {
+  // Any key to restart after game over (except skin keys and special keys)
+  if (state === GameState.GAME_OVER && !SKINS[e.key] && !e.shiftKey) {
     startGame();
   }
 });
 
 // ========== Initialize ==========
 loadSkin(googleSkin); // 預設載入 Google 皮膚
-initGame();
+loadGame(getGameFromURL()); // 從 URL 參數載入遊戲
 updateClock();
