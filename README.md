@@ -1,4 +1,4 @@
-# Operation Cobra 眼鏡蛇行動
+# 行動代號眼鏡蛇
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla-JavaScript-F7DF1E.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -172,9 +172,9 @@ open index.html
 
 > 老闆，我在上班時都乖乖認真工作喔。這只是下班後練習開發專案、精進程式能力的作品喔。千萬不要因為這樣就把我 FIRE，我真的很認真在上班的！🙏
 
-### 為什麼叫「眼鏡蛇行動」？
+### 為什麼叫「行動代號眼鏡蛇」？
 
-眼鏡蛇是貪食蛇遊戲中最標誌性的形象。而「行動」暗示著這是一場秘密任務——在老闆眼皮底下偷偷摸魚。
+眼鏡蛇是貪食蛇遊戲中最標誌性的形象。而「行動代號」暗示著這是一場秘密任務——在老闆眼皮底下偷偷摸魚。
 
 ### 摸魚的正當性
 

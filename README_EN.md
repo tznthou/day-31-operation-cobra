@@ -1,4 +1,4 @@
-# Operation Cobra
+# Code Name: Cobra
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla-JavaScript-F7DF1E.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -173,9 +173,9 @@ open index.html
 
 > Dear Boss, I work diligently during office hours, I promise! This is just a side project I built after work to practice coding and improve my skills. Please don't fire me because of this — I'm really serious about my job! 🙏
 
-### Why "Operation Cobra"?
+### Why "Code Name: Cobra"?
 
-The cobra is the most iconic image in Snake games. And "Operation" suggests this is a covert mission — secretly slacking off right under the boss's nose.
+The cobra is the most iconic image in Snake games. And "Code Name" suggests this is a covert mission — secretly slacking off right under the boss's nose.
 
 ### The Case for Slacking
 
