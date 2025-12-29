@@ -29,7 +29,7 @@ export const html = `
       <cite>https://www.ithome.com.tw</cite>
       <span class="breadcrumb"> › ai › trends › 2025</span>
     </div>
-    <a href="#" class="result-title" onclick="return false">2025 年 AI 十大趨勢預測：生成式 AI 將如何改變企業運作</a>
+    <span class="result-title">2025 年 AI 十大趨勢預測：生成式 AI 將如何改變企業運作</span>
     <p class="result-snippet">
       <span class="date">2025年1月2日 — </span>
       隨著 GPT-5 與 Gemini 2.0 的推出，2025 年將是 AI 應用爆發的一年。專家預測，超過 60% 的企業將在年底前導入生成式 AI 工具...
@@ -40,7 +40,7 @@ export const html = `
       <cite>https://www.techcrunch.com</cite>
       <span class="breadcrumb"> › artificial-intelligence</span>
     </div>
-    <a href="#" class="result-title" onclick="return false">AI Agents 時代來臨：2025 年最值得關注的人工智慧趨勢</a>
+    <span class="result-title">AI Agents 時代來臨：2025 年最值得關注的人工智慧趨勢</span>
     <p class="result-snippet">
       <span class="date">2024年12月28日 — </span>
       從 ChatGPT 到 Claude，AI 助手正在演變為能夠自主執行任務的 Agent。本文深入分析多模態 AI、邊緣運算與 AI 安全的最新發展...
@@ -51,7 +51,7 @@ export const html = `
       <cite>https://www.bloomberg.com</cite>
       <span class="breadcrumb"> › technology › ai-market</span>
     </div>
-    <a href="#" class="result-title" onclick="return false">Bloomberg：2025 年全球 AI 市場規模將突破 5000 億美元</a>
+    <span class="result-title">Bloomberg：2025 年全球 AI 市場規模將突破 5000 億美元</span>
     <p class="result-snippet">
       <span class="date">2025年1月5日 — </span>
       根據最新研究報告，AI 晶片需求持續飆升，NVIDIA、AMD 股價創歷史新高。企業 AI 投資預算平均增加 45%，雲端運算廠商競相...
@@ -62,7 +62,7 @@ export const html = `
       <cite>https://hbr.org</cite>
       <span class="breadcrumb"> › digital-transformation</span>
     </div>
-    <a href="#" class="result-title" onclick="return false">Harvard Business Review：如何制定 2025 年企業 AI 策略</a>
+    <span class="result-title">Harvard Business Review：如何制定 2025 年企業 AI 策略</span>
     <p class="result-snippet">
       <span class="date">2024年12月15日 — </span>
       成功導入 AI 的關鍵不在技術，而在組織文化。本文提供五個步驟，協助企業建立 AI-first 思維，從試驗專案走向規模化應用...
@@ -73,7 +73,7 @@ export const html = `
       <cite>https://www.wired.com</cite>
       <span class="breadcrumb"> › story › ai-predictions</span>
     </div>
-    <a href="#" class="result-title" onclick="return false">AI 會搶走你的工作嗎？專家解析 2025 年職場新趨勢</a>
+    <span class="result-title">AI 會搶走你的工作嗎？專家解析 2025 年職場新趨勢</span>
     <p class="result-snippet">
       <span class="date">2025年1月8日 — </span>
       與其擔心被取代，不如學習與 AI 協作。調查顯示，擅長使用 AI 工具的員工生產力提升 40%，薪資成長幅度也高於平均...

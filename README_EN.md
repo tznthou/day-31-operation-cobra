@@ -70,6 +70,49 @@ You're not playing a game, you're finding **an escape valve for stress**.
 
 ---
 
+## System Architecture
+
+### Module Relations
+
+```mermaid
+flowchart LR
+    subgraph Core[Core]
+        G[game.js<br/>Controller]
+    end
+
+    subgraph Games[Game Modules]
+        S[snake.js<br/>Snake]
+        T[game2048.js<br/>2048]
+    end
+
+    subgraph Skins[Skin Modules]
+        SK1[google.js]
+        SK2[excel.js]
+        SK3[jira.js]
+        SK4[slack.js]
+        SK5[notion.js]
+        SK6[vscode.js]
+    end
+
+    G -->|import| S & T
+    G -->|import| SK1 & SK2 & SK3 & SK4 & SK5 & SK6
+    S & T -.->|callbacks| G
+```
+
+### Game State Machine
+
+```mermaid
+stateDiagram-v2
+    [*] --> READY: Page Load
+    READY --> PLAYING: Arrow Key
+    PLAYING --> PAUSED: Esc
+    PAUSED --> PLAYING: Esc
+    PLAYING --> GAME_OVER: Collision/No Moves
+    GAME_OVER --> PLAYING: Any Key
+```
+
+---
+
 ## Project Structure
 
 ```
@@ -146,6 +189,24 @@ This game exists as a gentle protest against "work-above-all" culture.
 - **VS Code**: The ultimate disguise — pretending to code, who dares say you're slacking?
 
 These six scenarios cover almost all office "safe zones."
+
+---
+
+## Changelog
+
+### v1.1.0 (2025-12-29)
+
+**Bug Fixes**
+- 🐛 Fixed Snake rapid arrow key presses causing 180° reverse suicide
+- 🐛 Fixed clock timer running in background during active gameplay (resource waste)
+- 🐛 Fixed keyboard not working to restart after Game Over
+
+**Code Quality Improvements**
+- ✨ 2048 now has rapid key press protection to prevent input stacking
+- ✨ 2048 supports dynamic gradient colors for tiles > 4096 (gold → red)
+- 🔒 Removed `onclick="return false"` anti-pattern, replaced with semantic `<span>` (CSP friendly)
+- 🛡️ Added global error handler with user-friendly message on game errors
+- 🛡️ Added skin loading input validation to prevent invalid skin errors
 
 ---
 

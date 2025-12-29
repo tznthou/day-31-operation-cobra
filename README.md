@@ -70,6 +70,49 @@
 
 ---
 
+## 系統架構
+
+### 模組關係
+
+```mermaid
+flowchart LR
+    subgraph Core[核心]
+        G[game.js<br/>控制器]
+    end
+
+    subgraph Games[遊戲模組]
+        S[snake.js<br/>貪食蛇]
+        T[game2048.js<br/>2048]
+    end
+
+    subgraph Skins[皮膚模組]
+        SK1[google.js]
+        SK2[excel.js]
+        SK3[jira.js]
+        SK4[slack.js]
+        SK5[notion.js]
+        SK6[vscode.js]
+    end
+
+    G -->|import| S & T
+    G -->|import| SK1 & SK2 & SK3 & SK4 & SK5 & SK6
+    S & T -.->|callbacks| G
+```
+
+### 遊戲狀態機
+
+```mermaid
+stateDiagram-v2
+    [*] --> READY: 頁面載入
+    READY --> PLAYING: 方向鍵
+    PLAYING --> PAUSED: Esc
+    PAUSED --> PLAYING: Esc
+    PLAYING --> GAME_OVER: 碰撞/無法移動
+    GAME_OVER --> PLAYING: 任意鍵
+```
+
+---
+
 ## 專案結構
 
 ```
@@ -145,6 +188,24 @@ open index.html
 - **VS Code**：最終極的偽裝——假裝在寫程式，誰敢說你在摸魚？
 
 這六個場景覆蓋了幾乎所有辦公室的「安全區」。
+
+---
+
+## 更新日誌
+
+### v1.1.0 (2025-12-29)
+
+**Bug 修復**
+- 🐛 修復貪食蛇快速連按方向鍵可能導致 180° 反轉自殺的問題
+- 🐛 修復時鐘計時器在遊戲進行中仍在背景執行的資源浪費
+- 🐛 修復 Game Over 後按鍵盤無法重新開始的問題
+
+**程式碼品質改進**
+- ✨ 2048 新增快速按鍵保護，防止連擊累積
+- ✨ 2048 支援 4096 以上方塊的動態漸變色（金→紅）
+- 🔒 移除 `onclick="return false"` 反模式，改用語義化 `<span>`（CSP 友善）
+- 🛡️ 新增全域錯誤處理器，遊戲異常時顯示友善提示
+- 🛡️ 新增皮膚載入輸入驗證，防止無效皮膚導致錯誤
 
 ---
 

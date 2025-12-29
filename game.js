@@ -10,6 +10,13 @@ import * as vscodeSkin from './skins/vscode.js';
 import * as snakeGame from './games/snake.js';
 import * as game2048 from './games/game2048.js';
 
+// ========== Global Error Handler ==========
+window.addEventListener('error', (event) => {
+  console.error('遊戲發生錯誤:', event.error);
+  const msgEl = document.getElementById('game-message');
+  if (msgEl) msgEl.textContent = '遊戲發生錯誤，請重新整理';
+});
+
 // ========== Constants ==========
 const CLOCK_UPDATE_INTERVAL = 1000; // ms
 
@@ -68,10 +75,15 @@ function getGameFromURL() {
 
 // ========== Skin Functions ==========
 function loadSkin(skin) {
+  // L04: 輸入驗證
+  if (!skin || !skin.id || !skin.html) {
+    console.error('Invalid skin object:', skin);
+    return;
+  }
   skinContainer.innerHTML = `<div id="skin-${skin.id}" class="skin active">${skin.html}</div>`;
   currentSkin = skin.id;
   document.body.dataset.skin = skin.id;
-  pageTitle.textContent = skin.title;
+  pageTitle.textContent = skin.title || '';
 }
 
 function switchSkin(skinKey) {

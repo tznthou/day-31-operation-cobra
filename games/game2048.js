@@ -40,6 +40,15 @@ const COLORS = {
   }
 };
 
+// 取得磚塊顏色（支援 >2048 動態產生）
+function getTileColor(value) {
+  if (COLORS.tiles[value]) return COLORS.tiles[value];
+  // 超過 2048：金色往紅色漸變
+  const level = Math.log2(value) - 11; // 4096=1, 8192=2, ...
+  const hue = Math.max(0, 45 - level * 8);
+  return { bg: `hsl(${hue}, 80%, 50%)`, text: '#f9f6f2' };
+}
+
 // ========== Game State ==========
 let grid = [];
 let score = 0;
@@ -48,6 +57,7 @@ let ctx = null;
 let onScoreChange = null;
 let onGameOver = null;
 let isGameOver = false;
+let isProcessingMove = false; // 防止快速按鍵累積
 
 // ========== Public Interface ==========
 export function init(canvasEl, callbacks) {
@@ -82,8 +92,9 @@ export function resume() {
 }
 
 export function handleKey(key) {
-  if (isGameOver) return false;
+  if (isGameOver || isProcessingMove) return false;
 
+  isProcessingMove = true;
   let moved = false;
   switch (key) {
     case 'ArrowUp':
@@ -99,6 +110,7 @@ export function handleKey(key) {
       moved = moveRight();
       break;
     default:
+      isProcessingMove = false;
       return false;
   }
 
@@ -107,10 +119,12 @@ export function handleKey(key) {
     draw();
     if (checkGameOver()) {
       isGameOver = true;
+      isProcessingMove = false;
       if (onGameOver) onGameOver();
       return 'gameover';
     }
   }
+  isProcessingMove = false;
   return true;
 }
 
@@ -261,8 +275,7 @@ function draw() {
       if (value === 0) {
         ctx.fillStyle = COLORS.empty;
       } else {
-        const tileColor = COLORS.tiles[value] || COLORS.tiles[2048];
-        ctx.fillStyle = tileColor.bg;
+        ctx.fillStyle = getTileColor(value).bg;
       }
 
       roundRect(ctx, x, y, TILE_SIZE - TILE_GAP, TILE_SIZE - TILE_GAP, TILE_BORDER_RADIUS);
@@ -270,8 +283,7 @@ function draw() {
 
       // Draw tile number
       if (value !== 0) {
-        const tileColor = COLORS.tiles[value] || COLORS.tiles[2048];
-        ctx.fillStyle = tileColor.text;
+        ctx.fillStyle = getTileColor(value).text;
         ctx.font = value >= 1000 ? FONT_SIZE.LARGE : value >= 100 ? FONT_SIZE.MEDIUM : FONT_SIZE.SMALL;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
