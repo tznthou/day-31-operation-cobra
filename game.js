@@ -10,6 +10,9 @@ import * as vscodeSkin from './skins/vscode.js';
 import * as snakeGame from './games/snake.js';
 import * as game2048 from './games/game2048.js';
 
+// ========== Constants ==========
+const CLOCK_UPDATE_INTERVAL = 1000; // ms
+
 // ========== Game State ==========
 const GameState = {
   READY: 'ready',
@@ -95,9 +98,14 @@ function loadGame(gameId) {
     gameName.textContent = game.name;
   }
 
-  // Initialize game
-  currentGame.init(canvas, (newScore) => {
-    scoreDisplay.textContent = newScore;
+  // Initialize game with callbacks
+  currentGame.init(canvas, {
+    onScoreChange: (newScore) => {
+      scoreDisplay.textContent = newScore;
+    },
+    onGameOver: () => {
+      gameOver();
+    }
   });
 
   messageDisplay.textContent = '按方向鍵開始';
@@ -162,7 +170,7 @@ setInterval(() => {
   if (state === GameState.PAUSED) {
     updateClock();
   }
-}, 1000);
+}, CLOCK_UPDATE_INTERVAL);
 
 // ========== Input Handling ==========
 document.addEventListener('keydown', (e) => {
@@ -207,22 +215,19 @@ document.addEventListener('keydown', (e) => {
   if (isArrowKey) {
     e.preventDefault();
 
-    // Start game if ready
-    if (state === GameState.READY) {
+    // Start game if ready or restart after game over
+    if (state === GameState.READY || state === GameState.GAME_OVER) {
       startGame();
     }
 
-    // Pass to current game
+    // Pass to current game (game over is handled via callback)
     if (state === GameState.PLAYING) {
-      const result = currentGame.handleKey(e.key);
-      if (result === 'gameover') {
-        gameOver();
-      }
+      currentGame.handleKey(e.key);
     }
     return;
   }
 
-  // Any key to restart after game over (except skin keys and special keys)
+  // Any other key to restart after game over (except skin keys and special keys)
   if (state === GameState.GAME_OVER && !SKINS[e.key] && !e.shiftKey) {
     startGame();
   }

@@ -4,9 +4,23 @@ export const name = '2048';
 
 // ========== Game Constants ==========
 const GRID_SIZE = 4;
-const TILE_SIZE = 50;
-const TILE_GAP = 4;
+const CANVAS_SIZE = 200;
+const TILE_GAP = 2;
 const BOARD_PADDING = 4;
+// 計算 tile 大小：(canvas - 左右 padding - 間隙) / 格數
+const TILE_SIZE = Math.floor((CANVAS_SIZE - 2 * BOARD_PADDING - (GRID_SIZE - 1) * TILE_GAP) / GRID_SIZE);
+// = (200 - 8 - 6) / 4 = 46
+
+// 新磚塊生成參數
+const NEW_TILE_TWO_PROBABILITY = 0.9;
+const TILE_BORDER_RADIUS = 4;
+
+// 字體大小（根據數字位數）
+const FONT_SIZE = {
+  SMALL: 'bold 24px Arial',   // 1-2 位數
+  MEDIUM: 'bold 20px Arial',  // 3 位數
+  LARGE: 'bold 16px Arial'    // 4+ 位數
+};
 
 const COLORS = {
   background: '#bbada0',
@@ -32,20 +46,22 @@ let score = 0;
 let canvas = null;
 let ctx = null;
 let onScoreChange = null;
-let gameOver = false;
+let onGameOver = null;
+let isGameOver = false;
 
 // ========== Public Interface ==========
-export function init(canvasEl, scoreCallback) {
+export function init(canvasEl, callbacks) {
   canvas = canvasEl;
   ctx = canvas.getContext('2d');
-  onScoreChange = scoreCallback;
+  onScoreChange = callbacks.onScoreChange;
+  onGameOver = callbacks.onGameOver;
   reset();
 }
 
 export function reset() {
   grid = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(0));
   score = 0;
-  gameOver = false;
+  isGameOver = false;
   if (onScoreChange) onScoreChange(score);
   addRandomTile();
   addRandomTile();
@@ -66,7 +82,7 @@ export function resume() {
 }
 
 export function handleKey(key) {
-  if (gameOver) return false;
+  if (isGameOver) return false;
 
   let moved = false;
   switch (key) {
@@ -90,7 +106,8 @@ export function handleKey(key) {
     addRandomTile();
     draw();
     if (checkGameOver()) {
-      gameOver = true;
+      isGameOver = true;
+      if (onGameOver) onGameOver();
       return 'gameover';
     }
   }
@@ -98,7 +115,7 @@ export function handleKey(key) {
 }
 
 export function isRunning() {
-  return !gameOver;
+  return !isGameOver;
 }
 
 export function getScore() {
@@ -201,7 +218,7 @@ function addRandomTile() {
 
   if (emptyCells.length > 0) {
     const { row, col } = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-    grid[row][col] = Math.random() < 0.9 ? 2 : 4;
+    grid[row][col] = Math.random() < NEW_TILE_TWO_PROBABILITY ? 2 : 4;
   }
 }
 
@@ -248,14 +265,14 @@ function draw() {
         ctx.fillStyle = tileColor.bg;
       }
 
-      roundRect(ctx, x, y, TILE_SIZE - TILE_GAP, TILE_SIZE - TILE_GAP, 4);
+      roundRect(ctx, x, y, TILE_SIZE - TILE_GAP, TILE_SIZE - TILE_GAP, TILE_BORDER_RADIUS);
       ctx.fill();
 
       // Draw tile number
       if (value !== 0) {
         const tileColor = COLORS.tiles[value] || COLORS.tiles[2048];
         ctx.fillStyle = tileColor.text;
-        ctx.font = value >= 1000 ? 'bold 16px Arial' : value >= 100 ? 'bold 20px Arial' : 'bold 24px Arial';
+        ctx.font = value >= 1000 ? FONT_SIZE.LARGE : value >= 100 ? FONT_SIZE.MEDIUM : FONT_SIZE.SMALL;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(
