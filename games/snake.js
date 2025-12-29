@@ -89,7 +89,8 @@ export function handleKey(key) {
   if (directions[key]) {
     const opposites = { up: 'down', down: 'up', left: 'right', right: 'left' };
     const newDir = directions[key];
-    if (newDir !== opposites[direction]) {
+    // 檢查 nextDirection 防止快速連按導致 180° 反轉
+    if (newDir !== opposites[nextDirection]) {
       nextDirection = newDir;
     }
     return true; // key was handled

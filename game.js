@@ -22,6 +22,7 @@ const GameState = {
 };
 
 let state = GameState.READY;
+let clockTimer = null; // 時鐘計時器（只在暫停時執行）
 
 // ========== Skin System ==========
 const SKINS = {
@@ -142,9 +143,16 @@ function togglePause() {
     currentGame.pause();
     widget.classList.add('hidden');
     updateClock();
+    // 啟動時鐘計時器
+    clockTimer = setInterval(updateClock, CLOCK_UPDATE_INTERVAL);
   } else if (state === GameState.PAUSED) {
     state = GameState.PLAYING;
     widget.classList.remove('hidden');
+    // 停止時鐘計時器
+    if (clockTimer) {
+      clearInterval(clockTimer);
+      clockTimer = null;
+    }
     currentGame.resume();
   }
 }
@@ -164,13 +172,6 @@ function updateClock() {
   const weekday = weekdays[now.getDay()];
   clockDate.textContent = `${year}年${month}月${day}日 週${weekday}`;
 }
-
-// Update clock every second when hidden
-setInterval(() => {
-  if (state === GameState.PAUSED) {
-    updateClock();
-  }
-}, CLOCK_UPDATE_INTERVAL);
 
 // ========== Input Handling ==========
 document.addEventListener('keydown', (e) => {
