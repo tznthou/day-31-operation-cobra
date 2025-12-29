@@ -1,0 +1,1634 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  font-family: arial, sans-serif;
+  background: #fff;
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: none;
+}
+
+/* ========== Skin System ========== */
+.skin {
+  display: none;
+}
+
+.skin.active {
+  display: block;
+}
+
+/* ========== Skin 1: Google ========== */
+
+.google-header {
+  border-bottom: 1px solid #ebebeb;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+
+.google-logo {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.google-logo span:nth-child(1) { color: #4285f4; }
+.google-logo span:nth-child(2) { color: #ea4335; }
+.google-logo span:nth-child(3) { color: #fbbc05; }
+.google-logo span:nth-child(4) { color: #4285f4; }
+.google-logo span:nth-child(5) { color: #34a853; }
+.google-logo span:nth-child(6) { color: #ea4335; }
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  padding: 10px 16px;
+  max-width: 692px;
+  flex: 1;
+  box-shadow: 0 1px 6px rgba(32,33,36,.1);
+}
+
+.search-box:hover {
+  box-shadow: 0 1px 6px rgba(32,33,36,.2);
+}
+
+.search-icon {
+  color: #9aa0a6;
+  margin-right: 12px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  flex: 1;
+  color: #202124;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 5px;
+  margin-left: 150px;
+}
+
+.nav-tab {
+  padding: 12px 16px;
+  color: #5f6368;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-tab.active {
+  color: #1a73e8;
+  border-bottom-color: #1a73e8;
+}
+
+.search-results {
+  max-width: 652px;
+  margin-left: 150px;
+  padding: 20px 0;
+}
+
+.result-stats {
+  color: #70757a;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.result-item {
+  margin-bottom: 32px;
+}
+
+.result-url {
+  font-size: 14px;
+  color: #202124;
+  margin-bottom: 4px;
+}
+
+.result-url cite {
+  color: #202124;
+  font-style: normal;
+}
+
+.result-url .breadcrumb {
+  color: #5f6368;
+}
+
+.result-title {
+  font-size: 20px;
+  color: #1a0dab;
+  text-decoration: none;
+  line-height: 1.3;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.result-title:hover {
+  text-decoration: underline;
+}
+
+.result-snippet {
+  color: #4d5156;
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.result-snippet .date {
+  color: #70757a;
+}
+
+/* ========== Skin 2: Excel ========== */
+
+.excel-app {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 12px;
+  background: #e6e6e6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.excel-ribbon {
+  background: #217346;
+}
+
+.excel-title-bar {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background: #217346;
+  color: white;
+  font-size: 11px;
+}
+
+.excel-icon {
+  margin-right: 8px;
+}
+
+.excel-filename {
+  flex: 1;
+  text-align: center;
+}
+
+.excel-window-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.excel-window-controls span {
+  cursor: pointer;
+  padding: 2px 8px;
+}
+
+.excel-tabs {
+  display: flex;
+  background: #217346;
+  padding: 0 8px;
+}
+
+.excel-tab {
+  padding: 6px 16px;
+  color: rgba(255,255,255,0.8);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.excel-tab.active {
+  background: #fff;
+  color: #217346;
+  border-radius: 4px 4px 0 0;
+}
+
+.excel-toolbar {
+  display: flex;
+  gap: 16px;
+  padding: 8px 12px;
+  background: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.excel-tool-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.excel-btn {
+  padding: 6px 12px;
+  border: 1px solid #c4c4c4;
+  background: #fff;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.excel-btn-small {
+  padding: 4px 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  color: #444;
+}
+
+.excel-btn-icon {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.excel-font-select, .excel-size-select {
+  padding: 4px;
+  border: 1px solid #c4c4c4;
+  font-size: 11px;
+}
+
+.excel-font-select {
+  width: 100px;
+}
+
+.excel-size-select {
+  width: 50px;
+}
+
+.excel-formula-bar {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid #d4d4d4;
+  padding: 4px;
+}
+
+.excel-cell-name {
+  width: 80px;
+  padding: 4px 8px;
+  border: 1px solid #d4d4d4;
+  background: #f5f5f5;
+  font-size: 11px;
+}
+
+.excel-formula-input {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid #d4d4d4;
+  margin-left: 4px;
+  font-size: 11px;
+  font-family: Consolas, monospace;
+}
+
+.excel-sheet {
+  flex: 1;
+  background: #fff;
+  overflow: auto;
+  padding: 0;
+}
+
+.excel-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+
+.excel-table th, .excel-table td {
+  border: 1px solid #d4d4d4;
+  padding: 4px 8px;
+  text-align: left;
+  min-width: 80px;
+  height: 24px;
+}
+
+.excel-table th {
+  background: #f5f5f5;
+  font-weight: normal;
+  text-align: center;
+  color: #444;
+}
+
+.excel-row-header {
+  background: #f5f5f5 !important;
+  text-align: center !important;
+  width: 40px !important;
+  min-width: 40px !important;
+  color: #444;
+}
+
+.excel-header {
+  background: #d9ead3 !important;
+  font-weight: bold;
+}
+
+.excel-number {
+  text-align: right;
+  font-family: Consolas, monospace;
+}
+
+.excel-bold {
+  font-weight: bold;
+}
+
+.excel-positive {
+  color: #0a7c3e;
+  text-align: right;
+}
+
+.excel-negative {
+  color: #c0392b;
+  text-align: right;
+}
+
+.excel-highlight {
+  background: #fff2cc !important;
+}
+
+.excel-sheet-tabs {
+  display: flex;
+  background: #e6e6e6;
+  padding: 4px 8px;
+  gap: 2px;
+}
+
+.excel-sheet-tab {
+  padding: 4px 16px;
+  background: #d4d4d4;
+  border: 1px solid #c4c4c4;
+  border-bottom: none;
+  cursor: pointer;
+  font-size: 11px;
+  border-radius: 4px 4px 0 0;
+}
+
+.excel-sheet-tab.active {
+  background: #fff;
+}
+
+.excel-status-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 12px;
+  background: #217346;
+  color: white;
+  font-size: 11px;
+}
+
+.excel-status-right {
+  opacity: 0.9;
+}
+
+/* ========== Skin 3: Jira ========== */
+
+.jira-app {
+  display: flex;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f4f5f7;
+}
+
+.jira-sidebar {
+  width: 240px;
+  background: #0052cc;
+  color: white;
+  padding: 16px 0;
+}
+
+.jira-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  margin-bottom: 24px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.jira-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.jira-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.jira-nav-item:hover, .jira-nav-item.active {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.jira-nav-icon {
+  font-size: 16px;
+}
+
+.jira-main {
+  flex: 1;
+  padding: 24px;
+  overflow: auto;
+}
+
+.jira-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.jira-breadcrumb {
+  font-size: 14px;
+  color: #5e6c84;
+}
+
+.jira-breadcrumb .jira-current {
+  color: #172b4d;
+  font-weight: 500;
+}
+
+.jira-search input {
+  padding: 8px 12px;
+  border: 2px solid #dfe1e6;
+  border-radius: 4px;
+  width: 200px;
+  font-size: 14px;
+}
+
+.jira-search input:focus {
+  border-color: #0052cc;
+  outline: none;
+}
+
+.jira-board-title {
+  font-size: 24px;
+  color: #172b4d;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.jira-board {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+}
+
+.jira-column {
+  min-width: 280px;
+  max-width: 280px;
+  background: #ebecf0;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.jira-column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.jira-column-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5e6c84;
+  text-transform: uppercase;
+}
+
+.jira-column-count {
+  background: #dfe1e6;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #5e6c84;
+}
+
+.jira-card {
+  background: #fff;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 2px rgba(9,30,66,0.25);
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.jira-card:hover {
+  background: #f4f5f7;
+}
+
+.jira-card.done {
+  opacity: 0.6;
+}
+
+.jira-card.done .jira-card-title {
+  text-decoration: line-through;
+}
+
+.jira-card-type {
+  font-size: 16px;
+}
+
+.jira-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.jira-card-id {
+  font-size: 12px;
+  color: #5e6c84;
+  margin-bottom: 4px;
+}
+
+.jira-card-title {
+  font-size: 14px;
+  color: #172b4d;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.jira-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jira-priority {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.jira-priority.high {
+  background: #ffebe6;
+  color: #de350b;
+}
+
+.jira-priority.medium {
+  background: #fff0b3;
+  color: #ff8b00;
+}
+
+.jira-priority.low {
+  background: #e3fcef;
+  color: #006644;
+}
+
+.jira-avatar {
+  width: 24px;
+  height: 24px;
+  background: #0052cc;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* ========== Skin 4: Slack ========== */
+
+.slack-app {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Lato', 'Noto Sans TC', sans-serif;
+  background: #1a1d21;
+}
+
+.slack-workspace-bar {
+  width: 68px;
+  background: #3f0e40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+  gap: 12px;
+}
+
+.slack-workspace-icon {
+  width: 36px;
+  height: 36px;
+  background: #611f69;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.slack-workspace-icon.active {
+  background: #fff;
+  color: #611f69;
+}
+
+.slack-sidebar {
+  width: 260px;
+  background: #3f0e40;
+  color: #cfc3cf;
+  padding: 12px 0;
+}
+
+.slack-team-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 16px;
+  border-bottom: 1px solid #522653;
+  margin-bottom: 12px;
+}
+
+.slack-team-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: white;
+}
+
+.slack-dropdown {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.slack-nav-section {
+  margin-bottom: 16px;
+}
+
+.slack-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.slack-nav-item:hover {
+  background: #350d36;
+}
+
+.slack-nav-icon {
+  font-size: 14px;
+}
+
+.slack-channels-header {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #cfc3cf;
+}
+
+.slack-channel {
+  padding: 6px 16px 6px 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.slack-channel:hover {
+  background: #350d36;
+}
+
+.slack-channel.active {
+  background: #1164a3;
+  color: white;
+}
+
+.slack-channel span {
+  opacity: 0.8;
+}
+
+.slack-dm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px 6px 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.slack-dm:hover {
+  background: #350d36;
+}
+
+.slack-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.slack-status.online {
+  background: #2bac76;
+}
+
+.slack-status.away {
+  background: #dbb244;
+}
+
+.slack-main {
+  flex: 1;
+  background: #1a1d21;
+  display: flex;
+  flex-direction: column;
+}
+
+.slack-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid #3c3f45;
+}
+
+.slack-channel-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.slack-channel-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: #d1d2d3;
+}
+
+.slack-channel-desc {
+  font-size: 12px;
+  color: #9a9b9d;
+  margin-top: 2px;
+}
+
+.slack-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slack-header-btn {
+  cursor: pointer;
+  color: #9a9b9d;
+}
+
+.slack-search {
+  padding: 6px 12px;
+  background: #3c3f45;
+  border: none;
+  border-radius: 4px;
+  color: #d1d2d3;
+  width: 200px;
+  font-size: 13px;
+}
+
+.slack-messages {
+  flex: 1;
+  padding: 16px 20px;
+  overflow-y: auto;
+}
+
+.slack-date-divider {
+  text-align: center;
+  position: relative;
+  margin: 16px 0;
+}
+
+.slack-date-divider span {
+  background: #1a1d21;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9a9b9d;
+  position: relative;
+  z-index: 1;
+}
+
+.slack-date-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #3c3f45;
+}
+
+.slack-message {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.slack-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.slack-message-content {
+  flex: 1;
+}
+
+.slack-message-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.slack-username {
+  font-weight: 700;
+  font-size: 14px;
+  color: #d1d2d3;
+}
+
+.slack-time {
+  font-size: 12px;
+  color: #9a9b9d;
+}
+
+.slack-text {
+  font-size: 14px;
+  color: #d1d2d3;
+  line-height: 1.46;
+}
+
+.slack-reactions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.slack-reaction {
+  background: #3c3f45;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.slack-input-area {
+  padding: 20px;
+  border-top: 1px solid #3c3f45;
+}
+
+.slack-input-box {
+  display: flex;
+  align-items: center;
+  background: #222529;
+  border: 1px solid #565856;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.slack-input-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #d1d2d3;
+  font-size: 14px;
+  margin: 0 8px;
+}
+
+.slack-input-box input::placeholder {
+  color: #9a9b9d;
+}
+
+.slack-input-icon {
+  color: #9a9b9d;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* ========== Skin 5: Notion ========== */
+
+.notion-app {
+  display: flex;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
+  background: #fff;
+}
+
+.notion-sidebar {
+  width: 240px;
+  background: #fbfbfa;
+  border-right: 1px solid #e5e5e5;
+  padding: 12px 8px;
+}
+
+.notion-workspace {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.notion-workspace:hover {
+  background: #efefef;
+}
+
+.notion-workspace-icon {
+  font-size: 18px;
+}
+
+.notion-workspace-name {
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1;
+}
+
+.notion-dropdown {
+  font-size: 12px;
+  color: #999;
+}
+
+.notion-nav-section {
+  margin-bottom: 16px;
+}
+
+.notion-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-size: 14px;
+  color: #37352f;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.notion-nav-item:hover {
+  background: #efefef;
+}
+
+.notion-section-header {
+  font-size: 12px;
+  color: #999;
+  padding: 12px 8px 4px;
+  font-weight: 500;
+}
+
+.notion-page-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-size: 14px;
+  color: #37352f;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.notion-page-item:hover {
+  background: #efefef;
+}
+
+.notion-page-item.active {
+  background: #efefef;
+}
+
+.notion-add-page {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.notion-add-page:hover {
+  background: #efefef;
+  color: #37352f;
+}
+
+.notion-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.notion-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 48px;
+  font-size: 14px;
+}
+
+.notion-breadcrumb {
+  color: #999;
+}
+
+.notion-breadcrumb span:last-child {
+  color: #37352f;
+}
+
+.notion-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.notion-btn {
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #37352f;
+  cursor: pointer;
+}
+
+.notion-btn:hover {
+  background: #efefef;
+  border-radius: 4px;
+}
+
+.notion-content {
+  flex: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 48px 48px;
+  width: 100%;
+}
+
+.notion-page-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.notion-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #37352f;
+  margin-bottom: 16px;
+}
+
+.notion-properties {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.notion-property {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notion-property-name {
+  font-size: 14px;
+  color: #999;
+}
+
+.notion-tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.notion-tag.in-progress {
+  background: #d3e5ef;
+  color: #2d6da3;
+}
+
+.notion-tag.done {
+  background: #dbeddb;
+  color: #448241;
+}
+
+.notion-tag.pending {
+  background: #ffe2dd;
+  color: #93322e;
+}
+
+.notion-person {
+  font-size: 14px;
+  color: #37352f;
+}
+
+.notion-block {
+  margin-bottom: 8px;
+}
+
+.notion-block h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #37352f;
+  margin: 24px 0 12px;
+}
+
+.notion-block.todo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.notion-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #2eaadc;
+}
+
+.notion-checkbox.checked {
+  background: #2eaadc;
+  border-color: #2eaadc;
+  color: white;
+}
+
+.notion-block.todo span:last-child {
+  font-size: 14px;
+  color: #37352f;
+}
+
+.notion-table {
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.notion-table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.notion-table-row span {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+}
+
+.notion-table-row span:last-child {
+  border-right: none;
+}
+
+.notion-table-row:last-child span {
+  border-bottom: none;
+}
+
+.notion-table-row.header {
+  background: #f7f6f3;
+  font-weight: 500;
+}
+
+.notion-block.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: #f7f6f3;
+  padding: 16px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.notion-callout-icon {
+  font-size: 20px;
+}
+
+.notion-block.callout span:last-child {
+  font-size: 14px;
+  color: #37352f;
+  line-height: 1.5;
+}
+
+/* ========== Skin 6: VS Code ========== */
+
+.vscode-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
+  background: #1e1e1e;
+  color: #cccccc;
+  font-size: 13px;
+}
+
+.vscode-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #3c3c3c;
+  padding: 4px 12px;
+  font-size: 12px;
+}
+
+.vscode-titlebar-left {
+  display: flex;
+  gap: 12px;
+}
+
+.vscode-menu {
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.vscode-menu:hover {
+  background: #505050;
+}
+
+.vscode-titlebar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #cccccc;
+}
+
+.vscode-titlebar-right {
+  display: flex;
+  gap: 16px;
+}
+
+.vscode-titlebar-right span {
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+.vscode-titlebar-right span:hover {
+  background: #505050;
+}
+
+.vscode-main {
+  display: flex;
+  flex: 1;
+}
+
+.vscode-activitybar {
+  width: 48px;
+  background: #333333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.vscode-activity-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.vscode-activity-icon:hover {
+  opacity: 1;
+}
+
+.vscode-activity-icon.active {
+  opacity: 1;
+  border-left: 2px solid #fff;
+}
+
+.vscode-activity-icon.bottom {
+  margin-top: auto;
+}
+
+.vscode-sidebar {
+  width: 240px;
+  background: #252526;
+  border-right: 1px solid #3c3c3c;
+}
+
+.vscode-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #bbbbbb;
+}
+
+.vscode-sidebar-actions {
+  cursor: pointer;
+}
+
+.vscode-tree {
+  padding: 8px 0;
+}
+
+.vscode-tree-header {
+  padding: 4px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #cccccc;
+}
+
+.vscode-folder, .vscode-file {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 16px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.vscode-folder:hover, .vscode-file:hover {
+  background: #2a2d2e;
+}
+
+.vscode-folder-icon {
+  font-size: 14px;
+}
+
+.vscode-file.indent {
+  padding-left: 32px;
+}
+
+.vscode-file-icon {
+  font-size: 10px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.vscode-file-icon.ts {
+  background: #3178c6;
+  color: white;
+}
+
+.vscode-file-icon.json {
+  background: #cbcb41;
+  color: #333;
+}
+
+.vscode-file-icon.md {
+  background: #519aba;
+  color: white;
+}
+
+.vscode-editor-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #1e1e1e;
+}
+
+.vscode-tabs {
+  display: flex;
+  background: #252526;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+.vscode-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  border-right: 1px solid #3c3c3c;
+  background: #2d2d2d;
+  color: #888;
+}
+
+.vscode-tab.active {
+  background: #1e1e1e;
+  color: #fff;
+  border-bottom: 1px solid #1e1e1e;
+  margin-bottom: -1px;
+}
+
+.vscode-tab-icon {
+  font-size: 10px;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.vscode-tab-icon.ts {
+  background: #3178c6;
+  color: white;
+}
+
+.vscode-tab-close {
+  opacity: 0;
+  margin-left: 4px;
+}
+
+.vscode-tab:hover .vscode-tab-close {
+  opacity: 0.7;
+}
+
+.vscode-editor {
+  flex: 1;
+  padding: 8px 0;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: auto;
+}
+
+.vscode-line {
+  padding: 0 16px;
+  white-space: pre;
+}
+
+.vscode-line:hover {
+  background: #2a2d2e;
+}
+
+.vscode-ln {
+  display: inline-block;
+  width: 40px;
+  color: #858585;
+  text-align: right;
+  padding-right: 16px;
+  user-select: none;
+}
+
+.vscode-kw {
+  color: #569cd6;
+}
+
+.vscode-str {
+  color: #ce9178;
+}
+
+.vscode-fn {
+  color: #dcdcaa;
+}
+
+.vscode-var {
+  color: #9cdcfe;
+}
+
+.vscode-type {
+  color: #4ec9b0;
+}
+
+.vscode-num {
+  color: #b5cea8;
+}
+
+.vscode-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.vscode-statusbar {
+  display: flex;
+  justify-content: space-between;
+  background: #007acc;
+  padding: 2px 12px;
+  font-size: 12px;
+}
+
+.vscode-status-left, .vscode-status-right {
+  display: flex;
+  gap: 16px;
+}
+
+.vscode-status-item {
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.vscode-status-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* ========== Game Widget ========== */
+
+#game-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 220px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: opacity 0.15s ease;
+  z-index: 1000;
+}
+
+.widget-header {
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e8eaed;
+  font-size: 12px;
+  color: #5f6368;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.widget-hint {
+  font-size: 10px;
+  color: #9aa0a6;
+}
+
+#game-container {
+  padding: 10px;
+  text-align: center;
+}
+
+#snake-canvas {
+  background: #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+
+.score-display {
+  font-size: 12px;
+  color: #5f6368;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.game-message {
+  font-size: 11px;
+  color: #9aa0a6;
+  margin-top: 4px;
+}
+
+/* Clock Widget (Hidden State) */
+#clock-widget {
+  display: none;
+  padding: 20px;
+  text-align: center;
+}
+
+.clock-time {
+  font-size: 32px;
+  font-weight: 300;
+  color: #202124;
+  font-family: 'Segoe UI', arial, sans-serif;
+}
+
+.clock-date {
+  font-size: 14px;
+  color: #5f6368;
+  margin-top: 8px;
+}
+
+.clock-label {
+  font-size: 11px;
+  color: #9aa0a6;
+  margin-top: 12px;
+}
+
+/* Widget Hidden States */
+#game-widget.hidden #game-container {
+  display: none;
+}
+
+#game-widget.hidden #clock-widget {
+  display: block;
+}
+
+#game-widget.hidden .widget-header {
+  display: none;
+}

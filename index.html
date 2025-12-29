@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">2025 AI 趨勢 - Google 搜尋</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-skin="google">
+
+  <!-- Skin Container (動態載入) -->
+  <div id="skin-container"></div>
+
+  <!-- Game Widget -->
+  <div id="game-widget">
+    <div class="widget-header">
+      <span>小遊戲</span>
+      <span class="widget-hint">Esc 隱藏 | 1/2/3 換皮膚</span>
+    </div>
+    <div id="game-container">
+      <canvas id="snake-canvas" width="200" height="200"></canvas>
+      <div class="score-display">分數：<span id="score">0</span></div>
+      <div class="game-message" id="game-message">按方向鍵開始</div>
+    </div>
+    <div id="clock-widget">
+      <div class="clock-time" id="clock-time">--:--:--</div>
+      <div class="clock-date" id="clock-date">----年--月--日</div>
+      <div class="clock-label">本地時間</div>
+    </div>
+  </div>
+
+  <script type="module" src="game.js"></script>
+</body>
+</html>
