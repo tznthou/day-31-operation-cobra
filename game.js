@@ -150,22 +150,30 @@ function gameOver() {
 }
 
 function togglePause() {
-  if (state === GameState.PLAYING) {
+  if (state === GameState.PLAYING || state === GameState.GAME_OVER) {
+    // 記住原本狀態（用於恢復時判斷）
+    const wasGameOver = state === GameState.GAME_OVER;
     state = GameState.PAUSED;
     currentGame.pause();
     widget.classList.add('hidden');
+    widget.dataset.wasGameOver = wasGameOver; // 記錄是否從 GAME_OVER 進入暫停
     updateClock();
     // 啟動時鐘計時器
     clockTimer = setInterval(updateClock, CLOCK_UPDATE_INTERVAL);
   } else if (state === GameState.PAUSED) {
-    state = GameState.PLAYING;
+    // 恢復到正確的狀態
+    const wasGameOver = widget.dataset.wasGameOver === 'true';
+    state = wasGameOver ? GameState.GAME_OVER : GameState.PLAYING;
+    delete widget.dataset.wasGameOver;
     widget.classList.remove('hidden');
     // 停止時鐘計時器
     if (clockTimer) {
       clearInterval(clockTimer);
       clockTimer = null;
     }
-    currentGame.resume();
+    if (!wasGameOver) {
+      currentGame.resume();
+    }
   }
 }
 
@@ -213,10 +221,10 @@ document.addEventListener('keydown', (e) => {
     }
   }
 
-  // Escape key - toggle pause/hide
+  // Escape key - toggle pause/hide (支援 PLAYING、PAUSED、GAME_OVER 狀態)
   if (e.key === 'Escape') {
     e.preventDefault();
-    if (state === GameState.PLAYING || state === GameState.PAUSED) {
+    if (state === GameState.PLAYING || state === GameState.PAUSED || state === GameState.GAME_OVER) {
       togglePause();
     }
     return;

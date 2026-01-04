@@ -1,4 +1,4 @@
-# 行動代號眼鏡蛇
+# Operation Cobra 披著工作外皮的隱形遊戲
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla-JavaScript-F7DF1E.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -226,6 +226,12 @@ open index.html
 ## 授權
 
 MIT License © 2025
+
+---
+
+## 作者
+
+子超 - [tznthou@gmail.com](mailto:tznthou@gmail.com)
 
 ---
 
